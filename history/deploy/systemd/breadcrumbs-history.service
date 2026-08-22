@@ -1,0 +1,18 @@
+[Unit]
+Description=breadcrumbs price history
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/breadcrumbs/history
+ExecStart=/usr/bin/node %h/breadcrumbs/history/server/index.js
+Environment=PORT=8800
+Environment=BREADCRUMBS_BIND_ADDRESSES=127.0.0.1,100.64.0.36
+Environment=BREADCRUMBS_ACCESS_PROXY_PEERS=127.0.0.1
+Restart=always
+RestartSec=3
+StandardOutput=append:%h/breadcrumbs/history/server.log
+StandardError=append:%h/breadcrumbs/history/server.log
+
+[Install]
+WantedBy=default.target

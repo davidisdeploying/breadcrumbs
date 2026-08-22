@@ -1,0 +1,6 @@
+node_modules
+app/dist
+*.db
+*.db-*
+server.log
+data/

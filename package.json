@@ -1,0 +1,16 @@
+{
+  "name": "breadcrumbs",
+  "version": "1.0.0",
+  "description": "Self-hosted fetcher that pulls itemized Kroger orders and reconciles them into Monarch Money.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "login": "node login.mjs",
+    "inspect": "INSPECT=1 node fetch.mjs",
+    "fetch": "node fetch.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "playwright": "^1.49.0"
+  }
+}

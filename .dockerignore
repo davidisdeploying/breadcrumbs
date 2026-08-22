@@ -1,0 +1,7 @@
+node_modules
+.kroger-profile
+receipts
+debug
+.env
+*.log
+seen.json

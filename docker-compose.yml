@@ -1,0 +1,21 @@
+services:
+  fetcher:
+    build: .
+    image: breadcrumbs
+    container_name: breadcrumbs
+    env_file: .env
+    environment:
+      # Container always runs headless; the ledger lives inside the receipts volume
+      # so there's no separate state file to mount.
+      HEADLESS: "true"
+      LEDGER_PATH: "/app/receipts/seen.json"
+      USER_DATA_DIR: "/app/.kroger-profile"
+    volumes:
+      # The session created by `npm run login` on the host. Both sides use Playwright's
+      # Chromium, so the profile is portable host <-> container.
+      - ${HOME}/.local/state/breadcrumbs/browser-profile:/app/.kroger-profile
+      # Receipts output. Point RECEIPTS_DIR at your NAS CIFS mount to land them on the NAS,
+      # e.g. RECEIPTS_DIR=$STORAGE_ROOT/kroger-receipts in your .env.
+      - ${RECEIPTS_DIR:-./receipts}:/app/receipts
+    # One-shot: it runs, saves new receipts, and exits. The scheduler restarts it on a cadence.
+    restart: "no"
