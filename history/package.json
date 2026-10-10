@@ -1,0 +1,25 @@
+{
+  "name": "breadcrumbs-history",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "app",
+    "server"
+  ],
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "npm run build --workspace=app",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^6.0.0"
+  }
+}
