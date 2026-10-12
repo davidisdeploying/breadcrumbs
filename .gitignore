@@ -1,0 +1,17 @@
+# Secrets & credentials — never commit
+.env
+*.local
+
+# Authenticated browser session (logged-in Kroger profile)
+.kroger-profile/
+
+# Personal financial output
+breadcrumbs-orders.json
+
+# Dependencies & OS cruft
+node_modules/
+.DS_Store
+
+# Syncthing artifacts inside the shared extension/ folder
+extension/.stfolder/
+extension/.stignore

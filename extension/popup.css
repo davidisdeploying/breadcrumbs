@@ -1,0 +1,65 @@
+:root{
+  color-scheme:light;
+  --ink:#241B14; --char:#3A2410; --amber:#E0A12E; --cream:#E9E4D6;
+  --paper:#F7EFE0; --green:#3E8E5A; --line:#D8C9A8;
+}
+*{box-sizing:border-box}
+/* Safari gives the extension popover a translucent vibrancy backdrop and doesn't shrink it
+   to the body the way Chrome does — paint the root opaque and size it so no glass shows. */
+html{width:340px;background:var(--paper)}
+body{
+  width:340px; margin:0; padding:14px;
+  background:var(--paper); color:var(--ink);
+  font:13px/1.45 -apple-system,"Segoe UI",system-ui,sans-serif;
+}
+header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+header img{display:block}
+h1{font-size:24px;margin:0;font-weight:700;letter-spacing:-1px}
+.ctx{margin-left:auto;font-size:11px;color:var(--char);opacity:.7;display:inline-flex;align-items:center;gap:5px}
+.ctxicon{width:16px;height:16px;border-radius:4px;object-fit:contain;display:block}
+.row{display:flex;gap:8px;margin-bottom:8px}
+button{
+  flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:8px;
+  background:#fff;color:var(--ink);font-weight:600;cursor:pointer;font-size:13px;
+}
+button:hover:not(:disabled){border-color:var(--amber)}
+button:disabled{opacity:.5;cursor:default}
+button.primary{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+button.ghost{flex:0 0 auto;background:transparent;font-weight:500;color:var(--char)}
+details{margin:6px 0 8px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:6px 10px}
+summary{cursor:pointer;font-weight:600;font-size:12px}
+label{display:block;margin:8px 0;font-size:11px;color:var(--char)}
+input{width:100%;margin-top:3px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:12px}
+#log{
+  background:var(--ink);color:var(--cream);border-radius:8px;padding:10px;
+  font:11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+  white-space:pre-wrap;word-break:break-word;max-height:200px;overflow:auto;margin:8px 0 0;
+}
+.ok{color:#9bd07a}.warn{color:#f0c879}.err{color:#e58e84}
+button.wide{flex:1}
+.progress{position:relative;height:22px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:0 0 8px}
+.progress[hidden]{display:none}
+.progressfill{position:absolute;inset:0 auto 0 0;width:0;background:var(--amber);transition:width .2s ease}
+.progresslabel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--ink)}
+
+/* Styled tooltips: quirky label on the button, plain description on hover.
+   Driven by data-tip; appears instantly above the button, wraps long text. */
+button[data-tip]{position:relative}
+button[data-tip]::after{
+  content:attr(data-tip);
+  position:absolute; left:50%; bottom:calc(100% + 9px); transform:translateX(-50%);
+  width:max-content; max-width:240px; white-space:normal; text-align:center;
+  background:var(--ink); color:var(--cream);
+  font-size:11px; font-weight:500; line-height:1.35; letter-spacing:0;
+  padding:7px 9px; border-radius:7px; box-shadow:0 5px 16px rgba(36,27,20,.30);
+  opacity:0; visibility:hidden; transition:opacity .1s ease, visibility .1s; pointer-events:none; z-index:60;
+}
+button[data-tip]::before{
+  content:""; position:absolute; left:50%; bottom:calc(100% + 4px); transform:translateX(-50%);
+  border:5px solid transparent; border-top-color:var(--ink);
+  opacity:0; visibility:hidden; transition:opacity .1s ease, visibility .1s; pointer-events:none; z-index:60;
+}
+button[data-tip]:hover::after, button[data-tip]:focus-visible::after,
+button[data-tip]:hover::before, button[data-tip]:focus-visible::before{ opacity:1; visibility:visible; }
+/* let the disabled export button still show its tooltip on hover */
+button:disabled[data-tip]{pointer-events:auto}

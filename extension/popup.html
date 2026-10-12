@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="icons/icon128.png" width="40" height="40" alt="">
+    <h1>breadcrumbs</h1>
+    <span id="ctx" class="ctx"><img id="ctxicon" class="ctxicon" alt="" hidden><span id="ctxlabel">—</span></span>
+  </header>
+
+  <div class="row">
+    <button id="scan" class="primary"
+      data-tip="Scan the orders on this page and add them to your collected list">Gather recent orders</button>
+  </div>
+  <div class="row">
+    <button id="deepall" class="wide"
+      data-tip="Walk every page of your purchase history and collect all orders (takes a few minutes)">Follow the whole trail (slower)</button>
+  </div>
+
+  <div id="progress" class="progress" hidden>
+    <div id="progressfill" class="progressfill"></div>
+    <span id="progresslabel" class="progresslabel"></span>
+  </div>
+
+  <div class="row">
+    <button id="postServer" class="primary" disabled
+      data-tip="POST collected orders directly to self-hosted service over Tailscale">Sync to service (<span id="postCount">0</span>)</button>
+    <button id="export" class="ghost" disabled
+      data-tip="Download all collected orders as a breadcrumbs-orders.json file">Bag it up (<span id="count">0</span>)</button>
+    <button id="clear" class="ghost"
+      data-tip="Remove all collected orders and start over">Empty</button>
+  </div>
+
+  <details id="settings">
+    <summary>Under the hood — inspect &amp; selectors</summary>
+    <div class="row">
+      <button id="inspect" data-tip="Show what data this page exposes (for debugging selectors)">Inspect page</button>
+      <button id="dump" data-tip="Log the live page structure to the console (for debugging)">Dump</button>
+    </div>
+    <label>Service endpoint <input id="endpoint" placeholder="http://alpha.tail3327f9.ts.net:8800"></label>
+    <label>Order link <input id="orderLinkSel" placeholder='a[href*="/mypurchases/detail/"]'></label>
+    <label>Item row <input id="itemRowSel" placeholder='[data-testid^="list-style-product-card-"]'></label>
+    <label>Item name <input id="itemNameSel" placeholder=".item-name"></label>
+    <label>Item price <input id="itemPriceSel" placeholder=".item-price"></label>
+    <label>Order date <input id="dateSel" placeholder=".order-date"></label>
+    <label>Order total <input id="totalSel" placeholder=".order-total"></label>
+    <button id="save" class="ghost">Save settings</button>
+  </details>
+
+  <pre id="log" aria-live="polite"></pre>
+
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
